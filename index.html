@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Your Name</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <!-- optional animations + jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <!-- brand: put img first so it replaces initials smoothly -->
+      <div class="brand" style="display:flex;gap:12px;align-items:center">
+        <!-- brand image (hidden until upload). kept first to avoid layout shifts.
+             inline styles include border-radius:50% fallback if CSS fails to load immediately -->
+        <img id="brandPhoto" src="" alt="Profile" width="46" height="46"
+             style="border-radius:50%; object-fit:cover; display:none; width:46px; height:46px;" />
+
+        <!-- fallback initials (visible when no photo) -->
+        <div class="logo" id="logoInitial" aria-hidden="false"
+             style="width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;background:linear-gradient(135deg,#6a11cb,#2575fc);font-weight:700">
+          YN
+        </div>
+
+        <div>
+          <div class="name" id="heroName">Your Name</div>
+          <div class="role" id="heroRole">Frontend Developer</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <!-- place inside <nav class="nav"> -->
+<button id="themeToggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme" type="button">
+  <span class="theme-icon sun" aria-hidden="true">☀️</span>
+  <span class="theme-icon moon" aria-hidden="true" style="display:none">🌙</span>
+</button>
+
+
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <h1>Hi, I'm <span class="accent" id="accentName">Your Name</span></h1>
+      <p class="tagline"><span id="type"></span></p>
+      <p class="lead" id="leadText">
+        I design and build delightful, accessible, and fast front-end experiences using HTML, CSS and JavaScript.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="#projects">View My Work</a>
+        <a class="btn ghost" href="#contact">Let's talk</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <!-- avatar wrapper -->
+      <div class="avatar" style="position:relative; width:120px; height:120px; border-radius:50%; overflow:hidden;">
+        <img id="heroAvatar" src="" alt="Avatar"
+             style="border-radius:50%; object-fit:cover; display:none; width:120px; height:120px;" />
+        <div id="avatarPlaceholder"
+             style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+                    border-radius:50%; background:linear-gradient(135deg,#6a11cb,#2575fc); color:white;
+                    font-weight:700; cursor:pointer; user-select:none;">
+          Upload photo
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <div class="meta-title" id="metaTitle">Frontend Developer</div>
+        <div class="meta-sub" id="metaSub">HTML • CSS • JavaScript</div>
+        <div class="meta-buttons">
+  <!-- change Resume text to "Your portfolio" (JS already listens to id=downloadResume) -->
+  <button id="downloadResume" class="btn small">Your portfolio</button>
+
+  <!-- make this hero contact button scroll to contact section -->
+  <!-- adding data-scroll-to="contact" so the script will scroll smoothly -->
+  <button id="contactMe" class="btn small ghost" data-scroll-to="contact">Contact</button>
+</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <div class="section-grid">
+          <div class="about-left">
+            <h2>About</h2>
+            <p id="aboutText" class="about-paragraph">Write short bullets in the textarea and click "Generate About" to form a polished paragraph. Fill name & details in the form to update the page. All fields are mandatory.</p>
+
+            <div class="about-controls">
+              <input id="inputName" placeholder="Full name (e.g. John Doe)" />
+              <input id="inputRole" placeholder="Role / Tagline (e.g. Frontend Developer)" />
+              <input id="inputLocation" placeholder="Location (e.g. Remote, India)" />
+              <input id="inputAvail" placeholder="Availability (e.g. Open to work)" />
+              <input id="inputStack" placeholder="Preferred stack (e.g. HTML, CSS, JS)" />
+
+              <!-- NOTE: visible upload removed. Photo is uploaded ONLY via hero placeholder -->
+              <textarea id="bullets" placeholder="Enter bullets, one per line (e.g. '5 yrs JS', 'Built responsive dashboards')"></textarea>
+
+              <div class="about-actions">
+                <button id="generateAbout" class="btn" disabled>Generate About</button>
+                <button id="saveAbout" class="btn ghost">Save (session)</button>
+                <button id="resetAbout" class="btn ghost">Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-right card">
+            <h3>Quick facts</h3>
+            <div style="margin-bottom:8px">
+              <ul class="facts" id="quickFacts" style="margin:0;padding-left:18px">
+                <li id="factLocation">Location: Remote</li>
+                <li id="factAvail">Availability: Open to work</li>
+                <li id="factStack">Preferred stack: HTML, CSS, JS</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2>Skills</h2>
+        <div class="skills-row card">
+          <div id="skillsList" class="skills-list"></div>
+          <div class="skill-add">
+            <input id="newSkill" placeholder="Add skill (comma separated)" />
+            <button id="addSkill" class="btn">Add</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section projects-section">
+      <div class="container">
+        <h2>Projects</h2>
+        <div id="projectGrid" class="project-grid"></div>
+
+        <div class="card project-form">
+          <h3>Add Project</h3>
+          <form id="projectForm">
+            <input id="projTitle" placeholder="Project title" required />
+            <input id="projTech" placeholder="Technologies (comma separated)" />
+            <input id="projLink" placeholder="Optional link (https://...)" />
+            <textarea id="projDesc" placeholder="Short description"></textarea>
+            <div class="form-row">
+              <button type="submit" class="btn primary">Add Project</button>
+              <button type="button" id="clearProjects" class="btn ghost">Clear All</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+<!-- CONTACT -->
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <h2>Contact</h2>
+    <div class="contact-grid card">
+      <!-- LEFT: contact form with GitHub + LinkedIn inputs (no labels above) -->
+      <form id="contactForm" class="contact-form">
+        <input id="cname" placeholder="Your name" />
+        <input id="cemail" placeholder="Your email" />
+
+        <!-- no labels above these, just simple placeholders -->
+        <input id="contactGithubInput" placeholder="GitHub profile URL" />
+        <input id="contactLinkedinInput" placeholder="LinkedIn profile URL" />
+
+        <textarea id="cmessage" placeholder="Message" style="margin-top:12px"></textarea>
+
+        <div class="form-row" style="margin-top:10px">
+          <button type="submit" class="btn primary">Send Message</button>
+          <button type="button" id="viewInbox" class="btn ghost">View Inbox</button>
+        </div>
+      </form>
+
+        </div>
+      </div>
+    </section>
+
+<!-- Download heading (same style as Contact) -->
+<section aria-labelledby="downloadHeading" style="padding:22px 0 8px;">
+  <div class="container">
+    <h2 id="downloadHeading" style="margin-bottom:10px">Download your interactive portfolio</h2>
+  </div>
+</section>
+
+<!-- Download card (content below the heading) -->
+<section id="download-callout-section" style="padding:6px 0 36px;">
+  <div class="container">
+    <div class="card" style="display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:18px;">
+      <div style="flex:1;min-width:240px">
+        <p style="margin:0;color:var(--muted);max-width:720px">
+          Export a neat PDF snapshot of your profile — includes About, Skills and Projects. If you've uploaded a photo it will be embedded too.
+          Fill the required fields in the About section and then click the button to download.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-left:12px;">
+        <!-- single CTA (same id so scripts.js keeps working) -->
+        <button id="downloadPDF" class="btn primary" title="Download portfolio as PDF" disabled>
+          Download portfolio
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> <span id="footerName">Your Name</span> — Built with HTML · CSS · JavaScript</p>
+    </div>
+  </footer>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-body card">
+      <button id="modalClose" class="modal-close">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- hidden file input: only triggered by hero placeholder -->
+  <input id="photoUpload" type="file" accept="image/*" style="display:none" />
+
+  <!-- scripts (replace scripts.js with the latest version I gave) -->
+  <script src="scripts.js"></script>
+
+  
+</body>
+</html>

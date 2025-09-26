@@ -1,0 +1,464 @@
+/* styles.css — FINAL (replace your current file with this) */
+
+/* Reuse polished styles — minimal changes */
+:root{
+  --bg: linear-gradient(180deg,#f7fbff 0%,#eef6ff 100%);
+  --card-bg: rgba(255,255,255,0.95);
+  --accent1: #6a11cb;
+  --accent2: #2575fc;
+  --text:#0f172a;
+  --muted:#586069;
+}
+
+/* reset + base */
+*{box-sizing:border-box}
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
+  color:var(--text);
+  margin:0;
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+.topbar{backdrop-filter: blur(6px);position:sticky;top:0;z-index:50}
+.topbar .container{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;background:linear-gradient(135deg,var(--accent1),var(--accent2));font-weight:700}
+.name{font-weight:700}
+.role{font-size:13px;color:var(--muted)}
+.nav{display:flex;gap:10px;align-items:center}
+.nav a{color:var(--muted);text-decoration:none;padding:8px;border-radius:8px}
+.nav a:hover{color:var(--accent2);background:rgba(37,117,252,0.08)}
+.icon-btn{border:0;background:transparent;cursor:pointer;font-size:18px;padding:6px 8px;border-radius:8px}
+
+/* HERO */
+.hero{padding:60px 0}
+.hero-grid{display:grid;grid-template-columns:1fr 380px;gap:30px;align-items:center}
+.hero-content h1{font-size:38px;margin:0 0 6px}
+.accent{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{font-weight:600;color:var(--accent2);min-height:22px}
+.lead{color:var(--muted);margin-top:12px;max-width:60%}
+.cta-row{margin-top:18px;display:flex;gap:12px}
+
+/* Buttons — base */
+.btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;display:inline-block;text-decoration:none;transition:all .22s ease;font-weight:500}
+.btn.small{padding:6px 8px;font-size:13px}
+
+/* HERO card and avatar adjustments */
+.hero-card{background:var(--card-bg);padding:18px;border-radius:14px;box-shadow:0 10px 30px rgba(20,20,60,0.06);display:flex;gap:16px;align-items:center}
+.avatar{position:relative; width:120px; height:120px; flex: 0 0 120px; display:block;}
+/* uploaded image styling */
+.avatar img#heroAvatar{ width:120px;height:120px;border-radius:12px;object-fit:cover;display:block;box-shadow: 0 8px 20px rgba(37,117,252,0.08);border: 2px solid rgba(255,255,255,0.55); }
+/* placeholder (clickable) */
+#avatarPlaceholder{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border-radius:12px;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2)); color:white; font-weight:700; cursor:pointer; user-select:none;
+  box-shadow: 0 10px 30px rgba(37,117,252,0.12); transition: transform .12s ease, opacity .12s ease;
+}
+#avatarPlaceholder:hover{ transform: translateY(-3px); }
+
+.avatar svg{display:none}
+
+.hero-meta{display:flex;flex-direction:column;gap:6px}
+.meta-title{font-weight:700}
+.meta-sub{color:var(--muted);font-size:13px}
+.meta-buttons{display:flex;gap:8px;margin-top:6px}
+
+/* sections */
+.section{padding:40px 0}
+.section-grid{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+.card{background:var(--card-bg);padding:16px;border-radius:12px;box-shadow:0 8px 30px rgba(20,20,60,0.04)}
+.about-controls{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.about-controls input, .about-controls textarea{padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:rgba(255,255,255,0.98)}
+.about-actions{display:flex;gap:8px;align-items:center}
+
+/* Skills area polish */
+.skills-row{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px}
+.skills-list{display:flex;gap:8px;flex-wrap:wrap}
+.skill{padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,#eef6ff,#f3f9ff);font-weight:600;color:var(--accent2);cursor:pointer;box-shadow:0 6px 16px rgba(37,117,252,0.06)}
+.skill:hover{transform:translateY(-4px);transition:all .18s ease}
+
+/* skill input area — make input full width and button inline */
+.skill-add{display:flex;gap:8px;align-items:center}
+.skill-add input#newSkill{padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);min-width:220px;flex:1}
+.skill-add button#addSkill{padding:10px 12px;border-radius:8px}
+
+/* Projects */
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:16px}
+.project-card{background:#fff;border-radius:12px;padding:14px;box-shadow:0 12px 30px rgba(13,20,60,0.06);transition:transform .18s ease, box-shadow .18s ease}
+.project-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(13,20,60,0.12)}
+.project-card .title{font-weight:700;margin-bottom:6px}
+.project-meta{font-size:13px;color:var(--muted)}
+.project-actions{margin-top:10px;display:flex;gap:8px}
+.project-form input, .project-form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);margin-top:8px}
+.project-form .form-row{display:flex;gap:8px;align-items:center}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 300px;gap:18px;padding:12px}
+.contact-form input, .contact-form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);margin-top:8px}
+.form-row{display:flex;gap:8px;margin-top:12px;align-items:center}
+
+/* modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.5);z-index:60}
+.modal.show{display:flex}
+.modal-body{width:760px;max-width:94%;padding:18px;position:relative}
+.modal-close{position:absolute;right:12px;top:12px;border:0;background:transparent;font-size:18px;cursor:pointer}
+
+/* footer */
+.site-footer{padding:20px 0;text-align:center;color:var(--muted);font-size:14px}
+.socials{display:flex;gap:10px;margin-top:10px}
+
+/* small helper: file input make visible and tidy */
+input[type="file"]{ display:block; padding:8px 10px; border-radius:8px; border:1px solid rgba(15,23,42,0.06); background:transparent; }
+
+/* responsive */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:18px}
+  .lead{max-width:100%}
+  .section-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .hero-card{padding:14px}
+  .hero-content h1{font-size:30px}
+}
+
+/* avatar image styling — circle */
+.avatar{ position:relative; width:120px; height:120px; flex: 0 0 120px; display:block; border-radius:50%; overflow:hidden; }
+.avatar img#heroAvatar{ width:100%; height:100%; border-radius:50%; object-fit:cover; display:block; box-shadow:0 6px 18px rgba(37,117,252,0.18); border:2px solid rgba(255,255,255,0.6); }
+#avatarPlaceholder{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border-radius:50%; background:linear-gradient(135deg,var(--accent1),var(--accent2)); color:white; font-weight:700; cursor:pointer; user-select:none; box-shadow:0 8px 22px rgba(37,117,252,0.15); transition: transform .12s ease, opacity .12s ease; }
+#avatarPlaceholder:hover{ transform:scale(1.05); }
+
+/* force brand photo to appear as perfect circle */
+.brand img#brandPhoto { width:46px;height:46px;border-radius:50%;object-fit:cover;display:none;box-shadow:0 4px 12px rgba(37,117,252,0.15);border:2px solid rgba(255,255,255,0.75); }
+
+/* Download callout styling */
+#download-callout-section .card { padding:18px; align-items:center; box-shadow:0 12px 30px rgba(13,20,60,0.06); }
+#download-callout-section h3{ margin-bottom:6px; font-size:18px; }
+@media(max-width:800px){
+  #download-callout-section .card{ flex-direction:column; align-items:flex-start; gap:12px; }
+  #download-callout-section .card > div:last-child{ width:100%; display:flex; justify-content:flex-start; }
+}
+
+/* ensure anchor buttons no underline, don't change color on visited */
+a.btn { text-decoration:none !important; color:inherit; }
+a.btn:visited{ color:inherit !important; }
+a.btn:hover{ text-decoration:none !important; }
+
+/* =========================
+   BUTTONS: both buttons same:
+   DEFAULT = white box with dark text
+   HOVER  = purple gradient with white text
+   ========================= */
+
+/* default style for both primary and ghost in hero CTA */
+.hero .cta-row .btn.primary,
+.hero .cta-row .btn.ghost {
+  background: #fff !important;        /* white default */
+  color: #222 !important;             /* dark text */
+  border: 1px solid #e6e6e6 !important;
+  box-shadow: 0 6px 18px rgba(10,20,40,0.03);
+  padding: 10px 18px;
+  border-radius: 10px;
+}
+
+/* hover state (both same) */
+.hero .cta-row .btn.primary:hover,
+.hero .cta-row .btn.ghost:hover {
+  background: linear-gradient(90deg,var(--accent1),var(--accent2)) !important;
+  color: #fff !important;
+  border: none !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37,117,252,0.22);
+}
+
+/* also ensure other locations where .btn.primary used won't override */
+.btn.primary, .btn.ghost {
+  background: #fff;
+  color: #222 !important;
+  border: 1px solid #e6e6e6;
+}
+.btn.primary:hover, .btn.ghost:hover {
+  background: linear-gradient(90deg,var(--accent1),var(--accent2)) !important;
+  color: #fff !important;
+  border: none;
+}
+
+/* theme variables (light/dark) */
+:root{
+  --bg: linear-gradient(180deg,#f7fbff 0%,#eef6ff 100%);
+  --card-bg: rgba(255,255,255,0.95);
+  --text:#0f172a;
+  --muted:#586069;
+  --accent1:#6a11cb;
+  --accent2:#2575fc;
+  --surface: #ffffff;
+  --input-bg: #fff;
+  --shadow: 0 8px 30px rgba(20,20,60,0.04);
+}
+
+/* dark theme overrides */
+html[data-theme="dark"] {
+  --bg: linear-gradient(180deg,#061022 0%,#072033 100%);
+  --card-bg: rgba(10,18,28,0.85);
+  --text: #e6eef8;
+  --muted: #99a7be;
+  --accent1: #7b6aff;
+  --accent2: #4aa3ff;
+  --surface: rgba(6,12,20,0.75);
+  --input-bg: rgba(255,255,255,0.02);
+  --shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+body { background: var(--bg); color: var(--text); }
+.card { background: var(--card-bg); box-shadow: var(--shadow); }
+.about-controls input, .about-controls textarea,
+.contact-form input, .contact-form textarea,
+.project-form input, .project-form textarea,
+.skill-add input#newSkill {
+  background: var(--input-bg);
+  color: var(--text);
+  border: 1px solid rgba(15,23,42,0.06);
+}
+
+/* Theme icon helpers */
+.theme-icon { font-size: 18px; display:inline-block; line-height:1; }
+html[data-theme="light"] .theme-icon.sun { display:inline-block; }
+html[data-theme="light"] .theme-icon.moon { display:none; }
+html[data-theme="dark"] .theme-icon.sun { display:none; }
+html[data-theme="dark"] .theme-icon.moon { display:inline-block; }
+
+.icon-btn { background: transparent; border: 0; cursor: pointer; padding:6px; border-radius:8px; }
+.icon-btn:focus { outline: 2px solid rgba(99,102,241,0.2); outline-offset:2px; }
+
+* { transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease; }
+
+/* Disabled button style */
+.btn[disabled],
+button[disabled] {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(10%);
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* =========================
+   Strong override for the "Resume / Your portfolio" small button
+   (uses high specificity + !important to avoid being overridden)
+   ========================= */
+
+/* Target both hero meta Resume button and any "downloadResume" button anywhere */
+.hero .meta-buttons button#downloadResume.btn.small,
+button#downloadResume.btn.small,
+.meta-buttons button#downloadResume.btn.small,
+.header .meta-buttons button#downloadResume.btn.small {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fff !important;                  /* default white */
+  color: #222 !important;                       /* dark text */
+  border: 1px solid #ddd !important;
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 6px 18px rgba(10,20,40,0.03) !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  transition: all 0.22s ease !important;
+}
+
+/* Hover — strong override */
+.hero .meta-buttons button#downloadResume.btn.small:hover,
+button#downloadResume.btn.small:hover,
+.meta-buttons button#downloadResume.btn.small:hover {
+  background: linear-gradient(90deg,var(--accent1),var(--accent2)) !important;
+  color: #fff !important;
+  border: none !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 30px rgba(37,117,252,0.22) !important;
+}
+
+/* Focus-visible for accessibility */
+.hero .meta-buttons button#downloadResume.btn.small:focus,
+button#downloadResume.btn.small:focus,
+.meta-buttons button#downloadResume.btn.small:focus {
+  outline: 3px solid rgba(106,17,203,0.18) !important;
+  outline-offset: 3px !important;
+}
+
+/* Active state small press */
+.hero .meta-buttons button#downloadResume.btn.small:active,
+button#downloadResume.btn.small:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 6px 18px rgba(10,20,40,0.05) !important;
+}
+
+
+
+
+/* Custom confirm modal */
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+}
+.confirm-modal.show {
+  display: flex;
+}
+.confirm-box {
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  text-align: center;
+}
+.confirm-box p {
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.confirm-actions button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+.confirm-actions .ok-btn {
+  background: linear-gradient(90deg,var(--accent1),var(--accent2));
+  color: #fff;
+}
+.confirm-actions .cancel-btn {
+  background: #e5e7eb;
+  color: #111;
+}
+.confirm-actions .ok-btn:hover {
+  opacity: 0.9;
+}
+.confirm-actions .cancel-btn:hover {
+  background: #d1d5db;
+}
+
+
+
+.about-right.card {
+  margin-top: 24px; /* jitna niche chaiye utna px adjust kar lo */
+}
+
+
+
+/* Quick facts box */
+.about-right.card {
+  margin-left: 40px;  /* thoda right push karega */
+}
+
+
+.hero-card {
+  margin-left: 90px;  /* jitna right chaiye utna px adjust kar lo */
+}
+
+/* HERO grid expand */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;  /* pehle 380px tha, ab 420px kar diya */
+  gap: 40px; /* thoda gap bhi increase kar diya */
+}
+
+/* ABOUT section grid expand */
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;  /* pehle 320px tha, ab 360px */
+  gap: 40px;
+}
+
+
+/* ===== Adjust hero & about grid so right column can expand ===== */
+.hero-grid {
+  display: grid;
+  /* left column flexible, right column allowed to grow up to 480px */
+  grid-template-columns: 1fr minmax(360px, 480px);
+  gap: 70px; /* thoda zyada gap for breathing space */
+  align-items: center;
+}
+
+/* About/section layout: right column (quick facts) wider but responsive */
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 420px);
+  gap: 40px;
+  align-items: start;
+}
+
+/* Ensure the right-side cards don't shrink too much */
+.card {
+  min-width: 0; /* allows content to wrap correctly */
+}
+
+/* Quick facts card: keep it starting at top */
+.about-right.card {
+  align-self: start;
+}
+
+/* ===== Heading size & responsiveness ===== */
+/* Bigger hero heading without moving it left; responsive using clamp */
+.hero-content h1 {
+  font-size: clamp(34px, 5.8vw, 64px); /* scales between 34px and 64px */
+  line-height: 1.02;
+  margin: 0 0 6px;
+  max-width: 100%;
+}
+
+/* Make the tagline / small heading a bit larger too */
+.tagline {
+  font-size: clamp(14px, 1.6vw, 18px);
+}
+
+/* Meta/hero-right card: allow buttons and avatar to stay properly spaced */
+.hero-card {
+  padding: 20px;
+  border-radius: 16px;
+  margin-left: 102px;
+}
+
+/* Quick facts title & list slightly larger for better balance */
+.about-right h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.about-right .facts li {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Slightly increase hero-meta spacing so it looks roomy */
+.hero-meta { gap: 8px; }
+
+/* Small screens fallback keep original stacked layout */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 25px; }
+  .section-grid { grid-template-columns: 1fr; }
+  .hero-content h1 { font-size: 30px; }
+}
+
+
+
+/* Navbar adjustments */
+.nav {
+  display: flex;
+  gap: 20px;              /* links ke beech spacing */
+  align-items: center;
+        
+  margin-left: 30px;     /* thoda left shift ke liye isko kam/badhakar adjust karo */
+}
+
